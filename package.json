@@ -1,0 +1,27 @@
+{
+  "name": "accountabilibuddies",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Mark-Klocek/AccountaBiliBuddies#readme",
+  "bugs": {
+    "url": "https://github.com/Mark-Klocek/AccountaBiliBuddies/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mark-Klocek/AccountaBiliBuddies.git"
+  },
+  "license": "MIT",
+  "author": "Mark Klocek",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.17.1",
+    "passport": "^0.7.0"
+  }
+}
