@@ -5,24 +5,28 @@ import mongoose from 'mongoose'
 const TaskSchema = new mongoose.Schema({
     ownerID : {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required:true
     },
     taskText :{
         type: String,
-        required: true
+        required: true,
+        trim:true,
+        minLength: 3,
+        maxLength: 25
     },
     effectiveDate :{
         type: Date,
         required:true
         
     },
-    dateCreated :{
-        type:Date,
-        required:true
-    },
     visible:{
         type: Boolean,
         default: true
+    },
+    isComplete:{
+        type:Boolean,
+        default:false
     },
     createdAt: { 
         type:Date,
