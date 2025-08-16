@@ -5,17 +5,15 @@ import mongoose from 'mongoose'
 const DaySchema = new mongoose.Schema({
     ownerID : {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required:true
     },
-    dailyTasks:{
-      type: Array,
-      required: true  
-    },
-    totalTasks:{
-        type: Number,
-        required: true
-        
-    },
+    dailyTasks:[
+        {
+            text: {type:String, required:true, trim:true},
+            isComplete: {type:Boolean,default:false}
+        }
+    ],
     completedTasks:{
         type: Number,
         default: 0
