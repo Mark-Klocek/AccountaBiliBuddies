@@ -1,10 +1,16 @@
-const express = require('express')
+import express from 'express'
 const app = express()
 
 
-const homeRoutes = require('./routes/home')
+import homeRoutes from './routes/home.js'
 
-require('dotenv').config({path: './config/.env'})
+import dotenv from "dotenv";
+dotenv.config({ path: 'config/.env' });
+
+
+
+
+
 
 app.set('view engine','ejs')
 app.use(express.static('public'))
