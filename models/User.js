@@ -46,10 +46,8 @@ UserSchema.pre('save', function save(next){
 
 //validating password vs salted password upon user login
 
-UserSchema.methods.comparePassword = function comparePassword(candidatePassword,cb){
-    bcrypt.compare(candidatePassword, this.password,(err,isMatch =>{
-        cb(err,isMatch);
-    }))
+UserSchema.methods.comparePassword = function comparePassword(candidatePassword){
+   return bcrypt.compare(candidatePassword, this.password);
 }
 
 //exporting the schema ESM style

@@ -80,7 +80,7 @@ class authController {
         if (validationErrors.length) {
             console.log(validationErrors)
             req.flash("errors", validationErrors);
-            return res.redirect("../signup");
+            return res.redirect("../register");
         }
         req.body.email = validator.normalizeEmail(req.body.email, {
             gmail_remove_dots: false,
@@ -105,7 +105,7 @@ class authController {
                 req.flash("errors", {
                 msg: "Account with that email address or username already exists.",
                 });
-                return res.redirect("../signup");
+                return res.redirect("../register");
             }
             await user.save();
 
