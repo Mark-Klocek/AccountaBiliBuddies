@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+import bcrypt from 'bcrypt'
 
 //building user model for user collection in mongodb
 const UserSchema = new mongoose.Schema({

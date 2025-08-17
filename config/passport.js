@@ -2,7 +2,7 @@ import {Strategy as LocalStrategy} from 'passport-local'
 import mongoose from 'mongoose'
 import User from '../models/User.js'
 
-export default function (passport){
+export default async function (passport){
     passport.use(
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
       User.findOne({ email: email.toLowerCase() }, (err, user) => {
@@ -35,7 +35,12 @@ export default function (passport){
     done(null, user.id);
   });
 
-  passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => done(err, user));
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await User.findById(id).lean();
+      done(null, user || false);
+    } catch (err) {
+      done(err);
+    }
   });
 }
