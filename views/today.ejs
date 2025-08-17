@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>welcome to todday</h1>
-</body>
-</html>
+<%- include('partials/header') -%>
+
+    <h1>welcome to today!</h1>
+    <div>
+        
+        <a href="/profile" class="col-3 btn btn-primary">Your Profile</a>
+    </div>
+    <div>
+        
+        <a href="/tomorrow" class="col-3 btn btn-primary">Tomorrow</a>
+    </div>
+    <div>
+        
+        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+    </div>
+<%- include('partials/footer') -%>
