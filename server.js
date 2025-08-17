@@ -28,7 +28,7 @@ dotenv.config({ path: 'config/.env' });
 import homeRoutes from './routes/home.js'
 import profileRoute from './routes/profile.js'
 import todayRoute from './routes/today.js'
-// import tomorrowRoute from './routes/tomorrow.js'
+import tomorrowRoute from './routes/tomorrow.js'
 
 //configuring passport
 import configurePassport from './config/passport.js'
@@ -78,7 +78,7 @@ app.use(flash())
 app.use('/',homeRoutes)
 app.use('/profile',profileRoute)
 app.use('/today',todayRoute)
-    // app.use('/tomorrow',tomorrowRoute)
+app.use('/tomorrow',tomorrowRoute)
 
 
 
