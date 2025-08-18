@@ -9,11 +9,10 @@ class todayController {
 
    async getToday (req,res){
         try {
-            let effectiveDate = dayKeyLocal()
-            let user = await User.findById(req.user._id)
+            const effectiveDate = dayKeyLocal()
+            const user = await User.findById(req.user._id)
             const today = await Day.findOne({ownerID : req.user._id, effectiveDate}).lean()
-            console.log(user)
-            res.render('today.ejs');
+            res.render('today.ejs',{user,today});
         } catch (error) {
             console.log(error)
         }
