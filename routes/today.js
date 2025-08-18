@@ -7,5 +7,6 @@ import ensureFunctions from '../middleware/auth.js'
 import todayController from '../controllers/today.js'
 
 router.get("/", ensureFunctions.ensureAuth, todayController.getToday);
+router.post("/updateTask", todayController.updateTask);
 
 export default router

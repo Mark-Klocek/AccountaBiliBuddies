@@ -6,14 +6,34 @@
     <% } else{ %>  <ul>
     <h1>These are today's goals, <%= user.userName%>!</h1>
         <% today.dailyTasks.forEach(function(task) { %>
-            <li><form action="/tomorrow/deleteTask" method="POST">
+            <% if((task.isComplete == false)){ %>
+            <li><form action="/today/updateTask" method="POST">
                 <div class="col-3">
-                    <div class="input-group">
-                        <%= task.text%>
-                        
+                    <div class="input-group ">
+                        <span class="incompleteTask"><%= task.text%></span>
+                        <div class="input-group-prepend">
+                            <input type="hidden" name="dayId" value="<%= today._id %>">
+                            <input type="hidden" name="taskId" value="<%= task._id %>">
+                            <button type="submit">✅</button>
+                        </div>
                     </div>    
                 </div>   
             </form></li>
+            <% }else { %>
+                    <li>
+                <div class="col-3">
+                    <div class="input-group ">
+                        <span class="completeTask"><%= task.text%></span>
+                        <div class="input-group-prepend">
+                            <input type="hidden" name="dayId" value="<%= today._id %>">
+                            <input type="hidden" name="taskId" value="<%= task._id %>">
+                            
+                        </div>
+                    </div>    
+                </div>   
+            </li>
+            <% }%>
+            
             
         <% }); %> </ul>
     <% } %>
