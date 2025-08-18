@@ -12,6 +12,10 @@ class todayController {
             const effectiveDate = dayKeyLocal()
             const user = await User.findById(req.user._id)
             const today = await Day.findOne({ownerID : req.user._id, effectiveDate}).lean()
+
+            console.log(user)
+            console.log(today)
+            
             res.render('today.ejs',{user,today});
         } catch (error) {
             console.log(error)

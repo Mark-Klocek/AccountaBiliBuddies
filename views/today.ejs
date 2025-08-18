@@ -1,6 +1,24 @@
 <%- include('partials/header') -%>
 
-    <h1>welcome to today!</h1>
+    
+    <% if((today.dailyTasks.length === 0)){ %>
+    <h1>You have no tasks!</h1>
+    <% } else{ %>  <ul>
+    <h1>These are today's goals, <%= user.userName%>!</h1>
+        <% today.dailyTasks.forEach(function(task) { %>
+            <li><form action="/tomorrow/deleteTask" method="POST">
+                <div class="col-3">
+                    <div class="input-group">
+                        <%= task.text%>
+                        
+                    </div>    
+                </div>   
+            </form></li>
+            
+        <% }); %> </ul>
+    <% } %>
+    <h3>Today's tasks completion! <%= `${today.completedTasks}/${today.dailyTasks.length}`%></h3>
+    <span>You current streak is <%=user.currentStreak%> and your highest streak is <%=user.highestStreak%>!</span>
     <div>
         
         <a href="/profile" class="col-3 btn btn-primary">Your Profile</a>
