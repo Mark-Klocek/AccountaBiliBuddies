@@ -7,7 +7,7 @@ class tomorrowController {
     async getTomorrow (req,res){
         try {
             //getting effective date
-            let effectiveDate = dayKeyLocal()
+            let effectiveDate = dayKeyLocal(new Date, 1)
             //getting daily tasks
             const tomorrowTasks = await Task.find({ownerID : req.user._id, effectiveDate : effectiveDate, visible:true})
             const dailyTasks = tomorrowTasks.map(task=>({
@@ -48,7 +48,7 @@ class tomorrowController {
     }
     async addTask(req,res){
         try {
-            let effectiveDate = dayKeyLocal()
+            let effectiveDate = dayKeyLocal(new Date, 1)
             
             await Task.create(
                 {
@@ -71,7 +71,7 @@ class tomorrowController {
         try {
             
             console.log(req.body)
-            let task = await Task.findOneAndUpdate({_id: req.body.taskID}, {$set: {visible: false}})
+            await Task.findOneAndUpdate({_id: req.body.taskID}, {$set: {visible: false}})
             
             res.redirect('/tomorrow');
             
