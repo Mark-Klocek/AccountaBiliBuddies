@@ -34,4 +34,6 @@ const TaskSchema = new mongoose.Schema({
     }
 })
 
+TaskSchema.index({ownerID: 1, effectiveDate: 1})
+
 export default mongoose.model('Task', TaskSchema)

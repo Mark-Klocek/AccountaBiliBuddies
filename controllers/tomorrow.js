@@ -1,5 +1,6 @@
 import Task from '../models/Task.js'
 import Day from '../models/Day.js'
+import User from '../models/User.js'
 
 class tomorrowController {
 
@@ -10,11 +11,13 @@ class tomorrowController {
             effectiveDate.setDate(effectiveDate.getDate()+1)
             effectiveDate.setHours(0,0,0,0)
             //getting daily tasks
-            const tomorrowTasks = await Task.find({ownerID : req.user._id, effectiveDate : effectiveDate})
+            const tomorrowTasks = await Task.find({ownerID : req.user._id, effectiveDate : effectiveDate, visible:true})
             const dailyTasks = tomorrowTasks.map(task=>({
                 text: task.taskText,
                 isComplete: task.isComplete
             }))
+            //getting userName
+            let userInfo = await User.findOne(req.user._id)
             //setting tomorrow to the existing day, or creating a new Day
             let tomorrow = await Day.findOneAndUpdate(
                 {ownerID : req.user._id, effectiveDate : effectiveDate},
@@ -29,7 +32,7 @@ class tomorrowController {
                 },
                 {upsert:true,new: true, setDefaultsOnInsert: true}
             );            
-            res.render('tomorrow.ejs');
+            res.render('tomorrow.ejs', {nextDay: tomorrow, userInfo});
 
 
         } catch (error) {

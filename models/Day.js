@@ -33,4 +33,5 @@ const DaySchema = new mongoose.Schema({
     }
 })
 
+DaySchema.index({ownerID:1, effectiveDate:1})
 export default mongoose.model('Day', DaySchema)

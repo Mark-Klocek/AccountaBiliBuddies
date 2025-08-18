@@ -1,6 +1,11 @@
 <%- include('partials/header') -%>
 
-    <h1>welcome to tomorrow!</h1>
+    <h1>Set your goals for tomorrow, <%= userInfo.userName %></h1>
+
+    <% if (nextDay.dailyTasks.length === 0) { %>
+    <h2>You have no tasks!</h2>
+    <% } %>
+
     <div>
         
         <a href="/profile" class="col-3 btn btn-primary">Your Profile</a>
