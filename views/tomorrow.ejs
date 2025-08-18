@@ -4,20 +4,21 @@
     
     <% if((nextDay.dailyTasks.length === 0)){ %>
     <h1>You have no tasks!</h1>
-    <% } else{ %>  
+    <% } else{ %>  <ul>
         <% nextDay.dailyTasks.forEach(function(task) { %>
-            <form action="/tomorrow/deleteTask/" method="POST">
+            <li><form action="/tomorrow/deleteTask" method="POST">
                 <div class="col-3">
                     <div class="input-group">
                         <%= task.text%>
                         <div class="input-group-prepend">
-                            <input type="hidden" name="taskID" value="<%=task._id%>">
-                            <button type="submit" class="btn btn-success">delete</button>
+                            
+                            <button type="submit" name="taskID" value="<%= task.taskID %>" class="btn btn-success">delete</button>
                         </div>
                     </div>    
                 </div>   
-            </form>
-        <% }); %> 
+            </form></li>
+            
+        <% }); %> </ul>
     <% } %>
 
 

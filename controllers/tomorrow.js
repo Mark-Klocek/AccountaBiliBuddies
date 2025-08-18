@@ -15,6 +15,7 @@ class tomorrowController {
             const dailyTasks = tomorrowTasks.map(task=>({
                 text: task.taskText,
                 isComplete: task.isComplete,
+                taskID : task._id
                 
             }))
             //getting userName
@@ -35,7 +36,8 @@ class tomorrowController {
                     }
                 },
                 {upsert:true,new: true, setDefaultsOnInsert: true}
-            );            
+            );
+                        
             res.render('tomorrow.ejs', {nextDay: tomorrow, userInfo});
 
 
@@ -69,8 +71,18 @@ class tomorrowController {
         }
     }
     async deleteTask(req,res){
-        console.log(req.body)
-        let task = await Task.findOneAndUpdate(req.params.id)
+        console.log('test')
+        try {
+            
+            console.log(req.body)
+            let task = await Task.findOneAndUpdate({_id: req.body.taskID}, {$set: {visible: false}})
+            console.log(task)
+            res.redirect('/tomorrow');
+            
+        } catch (error) {
+            console.log(error)
+        } 
+        
         
     }
     

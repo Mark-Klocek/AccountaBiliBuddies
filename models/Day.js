@@ -12,6 +12,7 @@ const DaySchema = new mongoose.Schema({
         {
             text: {type:String, required:true, trim:true},
             isComplete: {type:Boolean,default:false},
+            taskID : {type:mongoose.Schema.Types.ObjectId}
         }
     ],
     completedTasks:{
