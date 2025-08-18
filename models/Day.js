@@ -24,7 +24,7 @@ const DaySchema = new mongoose.Schema({
         default: false
     },
     effectiveDate :{
-        type: Date,
+        type: String,
         required:true
         
     },
@@ -32,6 +32,7 @@ const DaySchema = new mongoose.Schema({
         type:Date,
         default: Date.now
     }
+    
 })
 
 DaySchema.index({ownerID:1, effectiveDate:1})

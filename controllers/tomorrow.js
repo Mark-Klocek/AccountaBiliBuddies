@@ -1,15 +1,13 @@
 import Task from '../models/Task.js'
 import Day from '../models/Day.js'
 import User from '../models/User.js'
-
+import {dayKeyLocal} from '../utils/date.js'
 class tomorrowController {
-
+    
     async getTomorrow (req,res){
         try {
             //getting effective date
-            let effectiveDate = new Date
-            effectiveDate.setDate(effectiveDate.getDate()+1)
-            effectiveDate.setHours(0,0,0,0)
+            let effectiveDate = dayKeyLocal()
             //getting daily tasks
             const tomorrowTasks = await Task.find({ownerID : req.user._id, effectiveDate : effectiveDate, visible:true})
             const dailyTasks = tomorrowTasks.map(task=>({
@@ -50,9 +48,7 @@ class tomorrowController {
     }
     async addTask(req,res){
         try {
-            let effectiveDate = new Date
-            effectiveDate.setDate(effectiveDate.getDate()+1)
-            effectiveDate.setHours(0,0,0,0)
+            let effectiveDate = dayKeyLocal()
             
             await Task.create(
                 {
@@ -76,7 +72,7 @@ class tomorrowController {
             
             console.log(req.body)
             let task = await Task.findOneAndUpdate({_id: req.body.taskID}, {$set: {visible: false}})
-            console.log(task)
+            
             res.redirect('/tomorrow');
             
         } catch (error) {
