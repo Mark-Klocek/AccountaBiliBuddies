@@ -11,7 +11,7 @@ const DaySchema = new mongoose.Schema({
     dailyTasks:[
         {
             text: {type:String, required:true, trim:true},
-            isComplete: {type:Boolean,default:false}
+            isComplete: {type:Boolean,default:false},
         }
     ],
     completedTasks:{

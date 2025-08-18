@@ -14,7 +14,8 @@ class tomorrowController {
             const tomorrowTasks = await Task.find({ownerID : req.user._id, effectiveDate : effectiveDate, visible:true})
             const dailyTasks = tomorrowTasks.map(task=>({
                 text: task.taskText,
-                isComplete: task.isComplete
+                isComplete: task.isComplete,
+                
             }))
             //getting userName
             let userInfo = await User.findOne(req.user._id)
@@ -22,12 +23,15 @@ class tomorrowController {
             let tomorrow = await Day.findOneAndUpdate(
                 {ownerID : req.user._id, effectiveDate : effectiveDate},
                 {
-                    $setOnInsert:{
+                    $set:{
                         ownerID : req.user._id,
-                        dailyTasks,
-                        effectiveDate,
+                        dailyTasks : dailyTasks,
                         completedTasks:0,
                         goalReached:false,
+                        effectiveDate,
+                        createdAt: Date.now()
+                        
+                        
                     }
                 },
                 {upsert:true,new: true, setDefaultsOnInsert: true}
@@ -38,7 +42,35 @@ class tomorrowController {
         } catch (error) {
             console.log(error)
         }
-        //const tomorrow = await Day.find( {ownerID : req.user._id, effectiveDate : }) 
+        
+        
+        
+    }
+    async addTask(req,res){
+        try {
+            let effectiveDate = new Date
+            effectiveDate.setDate(effectiveDate.getDate()+1)
+            effectiveDate.setHours(0,0,0,0)
+            
+            await Task.create(
+                {
+                   ownerID : req.user._id,
+                   taskText : req.body.taskText,
+                   effectiveDate,
+                   visible: true,
+                   isComplete: false,
+                   createdAt: Date.now() 
+                }
+            )
+            
+            res.redirect('/tomorrow');   
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    async deleteTask(req,res){
+        console.log(req.body)
+        let task = await Task.findOneAndUpdate(req.params.id)
         
     }
     

@@ -1,11 +1,37 @@
 <%- include('partials/header') -%>
 
     <h1>Set your goals for tomorrow, <%= userInfo.userName %></h1>
-
-    <% if (nextDay.dailyTasks.length === 0) { %>
-    <h2>You have no tasks!</h2>
+    
+    <% if((nextDay.dailyTasks.length === 0)){ %>
+    <h1>You have no tasks!</h1>
+    <% } else{ %>  
+        <% nextDay.dailyTasks.forEach(function(task) { %>
+            <form action="/tomorrow/deleteTask/" method="POST">
+                <div class="col-3">
+                    <div class="input-group">
+                        <%= task.text%>
+                        <div class="input-group-prepend">
+                            <input type="hidden" name="taskID" value="<%=task._id%>">
+                            <button type="submit" class="btn btn-success">delete</button>
+                        </div>
+                    </div>    
+                </div>   
+            </form>
+        <% }); %> 
     <% } %>
 
+
+    <form action="/tomorrow/addTask" method="POST">
+        <div class="col-3">
+            <div class="input-group">
+                <input type="text" class="col-3 form-control" id="addTask" name="taskText">
+                <div class="input-group-prepend">
+                    <button type="submit" class="btn btn-success">Add Task</button>
+                </div>
+            </div>    
+        </div>   
+    </form>
+    
     <div>
         
         <a href="/profile" class="col-3 btn btn-primary">Your Profile</a>
@@ -18,4 +44,6 @@
         
         <a href="/logout" class="col-3 btn btn-primary">Logout</a>
     </div>
+    
+  
 <%- include('partials/footer') -%>

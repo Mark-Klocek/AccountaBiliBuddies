@@ -7,5 +7,7 @@ import ensureFunctions from '../middleware/auth.js'
 import tomorrowController from '../controllers/tomorrow.js'
 
 router.get("/", ensureFunctions.ensureAuth, tomorrowController.getTomorrow);
+router.post('/addTask',tomorrowController.addTask);
+router.post('/deleteTask/',tomorrowController.deleteTask)
 
 export default router
