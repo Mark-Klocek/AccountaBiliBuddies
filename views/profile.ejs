@@ -1,19 +1,21 @@
 <%- include('partials/header') -%>
-
-    <h1>Welcome, <%= user.userName %></h1>
-    <h3>Current Streak: <%= user.currentStreak %></5></h3>
-    <h3>Highest Streak: <%= user.highestStreak %></5></h3>
+<div class="taskContainer col-12">
     
-    <div>
-        
-        <a href="/today" class="col-3 btn btn-primary">Today</a>
-    </div>
-    <div>
-        
-        <a href="/tomorrow" class="col-3 btn btn-primary">Tomorrow</a>
-    </div>
-    <div>
-        
-        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-    </div>
+        <h1>Welcome, <%= user.userName %></h1>
+        <h3>Current Streak: <%= user.currentStreak %></5></h3>
+        <h3>Highest Streak: <%= user.highestStreak %></5></h3>
+    
+        <div>
+    
+            <a href="/today" class="">Today</a>
+        </div>
+        <div>
+    
+            <a href="/tomorrow" class="">Tomorrow</a>
+        </div>
+        <div>
+    
+            <a href="/logout" class="">Logout</a>
+        </div>
+</div>
 <%- include('partials/footer') -%>

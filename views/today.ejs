@@ -1,54 +1,47 @@
 <%- include('partials/header') -%>
 
-    
-    <% if((today.dailyTasks.length === 0)){ %>
-    <h1>You have no tasks!</h1>
-    <% } else{ %>  <ul>
-    <h1>These are today's goals, <%= user.userName%>!</h1>
-        <% today.dailyTasks.forEach(function(task) { %>
-            <% if((task.isComplete == false)){ %>
-            <li><form action="/today/updateTask" method="POST">
-                <div class="col-3">
-                    <div class="input-group ">
-                        <span class="incompleteTask"><%= task.text%></span>
-                        <div class="input-group-prepend">
-                            <input type="hidden" name="dayId" value="<%= today._id %>">
-                            <input type="hidden" name="taskId" value="<%= task._id %>">
-                            <button type="submit">✅</button>
-                        </div>
-                    </div>    
-                </div>   
-            </form></li>
-            <% }else { %>
-                    <li>
-                <div class="col-3">
-                    <div class="input-group ">
-                        <span class="completeTask"><%= task.text%></span>
-                        <div class="input-group-prepend">
-                            <input type="hidden" name="dayId" value="<%= today._id %>">
-                            <input type="hidden" name="taskId" value="<%= task._id %>">
-                            
-                        </div>
-                    </div>    
-                </div>   
-            </li>
-            <% }%>
-            
-            
-        <% }); %> </ul>
-    <% } %>
-    <h3>Today's tasks completion! <%= `${today.completedTasks}/${today.dailyTasks.length}`%></h3>
-    <span>You current streak is <%=user.currentStreak%> and your highest streak is <%=user.highestStreak%>!</span>
-    <div>
-        
-        <a href="/profile" class="col-3 btn btn-primary">Your Profile</a>
+
+  <div class="taskContainer col-12">
+      
+        <% if ((today.dailyTasks.length === 0)) { %>
+          <h1>You have no tasks!</h1>
+        <% } else { %>
+          <h1>These are today's goals, <%= user.userName %>!</h1>
+          <ul>
+            <% today.dailyTasks.forEach(function(task) { %>
+              <% if (task.isComplete == false) { %>
+                <li>
+                  <form action="/today/updateTask" method="POST">
+                    <span class="task incompleteTask"><%= task.text %></span>
+                    <input type="hidden" name="dayId" value="<%= today._id %>">
+                    <input type="hidden" name="taskId" value="<%= task._id %>">
+                    <button type="submit">✅</button>
+                  </form>
+                </li>
+              <% } else { %>
+                <li>
+                  <span class="completeTask"><%= task.text %></span>
+                  <input type="hidden" name="dayId" value="<%= today._id %>">
+                  <input type="hidden" name="taskId" value="<%= task._id %>">
+                </li>
+              <% } %>
+            <% }); %>
+          </ul>
+        <% } %>
+        <h3>Today's tasks completion! <%= `${today.completedTasks}/${today.dailyTasks.length}` %></h3>
+        <span>Your current streak is <%= user.currentStreak %> and your highest streak is <%= user.highestStreak %>!</span>
+  
+
+        <div>
+        <a href="/profile">Your Profile</a>
+        </div>
+        <div>
+        <a href="/tomorrow">Tomorrow</a>
+        </div>
+        <div>
+        <a href="/logout">Logout</a>
+        </div>
     </div>
-    <div>
-        
-        <a href="/tomorrow" class="col-3 btn btn-primary">tomorrow</a>
-    </div>
-    <div>
-        
-        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-    </div>
+</main>
+
 <%- include('partials/footer') -%>

@@ -1,50 +1,54 @@
 <%- include('partials/header') -%>
 
     <h1>Set your goals for tomorrow, <%= userInfo.userName %></h1>
-    
-    <% if((nextDay.dailyTasks.length === 0)){ %>
-    <h1>You have no tasks!</h1>
-    <% } else{ %>  <ul>
-        <% nextDay.dailyTasks.forEach(function(task) { %>
-            <li><form action="/tomorrow/deleteTask" method="POST">
-                <div class="col-3">
-                    <div class="input-group">
-                        <%= task.text%>
-                        <div class="input-group-prepend">
-                            
-                            <button type="submit" name="taskID" value="<%= task.taskID %>" class="btn btn-success">delete</button>
+    <div class="taskContainer col-12">
+        
+        <% if((nextDay.dailyTasks.length === 0)){ %>
+        <h1>You have no tasks!</h1>
+        <% } else{ %>  <ul>
+            <% nextDay.dailyTasks.forEach(function(task) { %>
+                <li><form action="/tomorrow/deleteTask" method="POST">
+                    <div class="col-12">
+                        <div class="input-group">
+                           <span class="task"><%= task.text%></span>
+                            <div class="input-group-prepend">
+        
+                                <button type="submit" name="taskID" value="<%= task.taskID %>">delete</button>
+                            </div>
                         </div>
-                    </div>    
-                </div>   
-            </form></li>
+                    </div>
+                </form></li>
+        
+            <% }); %> </ul>
+        <% } %>
+    
+
+
+        <form action="/tomorrow/addTask" method="POST">
+            <div class="col-8">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="addTask" name="taskText">
+                    <div class="input-group-prepend">
+                        <button type="submit" >Add Task</button>
+                    </div>
+                </div>    
+            </div>   
+        </form>
+        
+        
+        
+        <div>  
+            <a href="/profile" class="">Your Profile</a>
+        </div>
+        <div>
             
-        <% }); %> </ul>
-    <% } %>
-
-
-    <form action="/tomorrow/addTask" method="POST">
-        <div class="col-3">
-            <div class="input-group">
-                <input type="text" class="col-3 form-control" id="addTask" name="taskText">
-                <div class="input-group-prepend">
-                    <button type="submit" class="btn btn-success">Add Task</button>
-                </div>
-            </div>    
-        </div>   
-    </form>
-    
-    <div>
-        
-        <a href="/profile" class="col-3 btn btn-primary">Your Profile</a>
+            <a href="/today" class="">Today</a>
+        </div>
+        <div>
+            
+            <a href="/logout" class="">Logout</a>
+        </div>
     </div>
-    <div>
-        
-        <a href="/today" class="col-3 btn btn-primary">Today</a>
-    </div>
-    <div>
-        
-        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-    </div>
-    
+</main>
   
 <%- include('partials/footer') -%>
